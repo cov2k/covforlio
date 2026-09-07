@@ -62,8 +62,14 @@ print(arr[2])
             }
         }
         </script>
-
-
+        <h3>why array access is O(1)</h3>
+        <p>
+            arrays store their elements in contiguous memory. this means that if you know the starting
+            address of the array, you can compute the location of any element instantly using:
+        </p>
+        <pre class="code">
+        address_of_element = base_address + (index * size_of_each_element)
+        </pre>
     </section>
 
     <section>
