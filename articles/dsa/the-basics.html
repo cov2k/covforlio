@@ -28,40 +28,10 @@ print(arr)
 print(arr[2])
         </textarea>
 
-        <button onclick="runPy()" class="run-btn">run</button>
+        <button onclick="runPyCell('py-cell', 'py-output')" class="run-btn">run</button>
 
         <pre id="py-output" class="output"></pre>
-        <script>
-        let pyodide;
 
-        async function loadPy() {
-            pyodide = await loadPyodide();
-        }
-        loadPy();
-
-        async function runPy() {
-            const code = document.getElementById("py-cell").value;
-
-            try {
-                // capture stdout
-                let output = "";
-                pyodide.setStdout({
-                    batched: (data) => {
-                        output += data + "\n";
-                    }
-                });
-
-                // run the code
-                const result = await pyodide.runPythonAsync(code);
-
-                // show printed output OR final expression result
-                document.getElementById("py-output").textContent =
-                    output.trim() || (result !== undefined ? result : "");
-            } catch (err) {
-                document.getElementById("py-output").textContent = err;
-            }
-        }
-        </script>
         <h3>why array access is O(1)</h3>
         <p>
             arrays store their elements in contiguous memory. this means that if you know the starting
@@ -72,12 +42,58 @@ print(arr[2])
         </pre>
     </section>
 
-    <section>
-        <h2>linked lists</h2>
-        <p>
-            nodes connected by pointers.
-        </p>
-    </section>
+<section>
+    <h2>linked lists</h2>
+    <p>
+        nodes connected by pointers.
+    </p>
+
+    <h3>python example (interactive)</h3>
+
+    <textarea id="py-cell-linked" class="code-cell">
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+# build a simple linked list: 1 -> 2 -> 3 -> 4
+head = Node(1)
+head.next = Node(2)
+head.next.next = Node(3)
+head.next.next.next = Node(4)
+
+# traverse to the 3rd element (index 2)
+current = head
+steps = 2
+for _ in range(steps):
+    current = current.next
+
+print(current.value)
+    </textarea>
+
+    <button onclick="runPyCell('py-cell-linked', 'py-output-linked')" class="run-btn">run</button>
+
+    <pre id="py-output-linked" class="output"></pre>
+
+    <h3>why linked list access is O(n)</h3>
+    <p>
+        linked lists do not store elements in contiguous memory. each node only knows where the
+        next node is. to reach the n-th element, you must start at the head and follow each pointer
+        one by one until you arrive at the correct node.
+    </p>
+
+    <pre class="code">
+node_i = head
+for step in range(n):
+    node_i = node_i.next
+    </pre>
+
+    <p>
+        this traversal grows linearly with the index. accessing the first element is O(1), but
+        accessing the last element requires visiting every node, making linked list access O(n).
+    </p>
+</section>
+
 
     <section>
         <h2>stacks & queues</h2>
@@ -113,3 +129,6 @@ print(arr[2])
     </footer>
 </body>
 </html>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+<script src="/scripts/py.js"></script>
