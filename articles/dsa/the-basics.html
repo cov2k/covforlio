@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dsa basics</title>
     <link rel="stylesheet" href="../../style.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
 </head>
 
 <body>
@@ -13,52 +14,37 @@
         <p>a high-level overview of core data structures</p>
     </header>
 
-<section>
-    <h2>arrays</h2>
+    <section>
+        <h2>arrays</h2>
+        <p>
+            the simplest structure.
+        </p>
+        <h3>python example (interactive)</h3>
 
-    <p>
-        an array is a collection of elements stored in contiguous memory.
-        fast random access, predictable performance, but resizing is expensive.
-    </p>
+        <textarea id="py-cell" class="code-cell">
+        arr = [1, 2, 3, 4]
+        print(arr)
+        print(arr[2])
+        </textarea>
 
-    <h3>py example</h3>
-    <pre><code class="code">
-arr = [1, 2, 3, 4]
-print(arr)
-print(arr[2])
-    </code></pre>
+        <button onclick="run()" class="run-btn">run</button>
 
-    <div class="output">
-        <p>[1, 2, 3, 4]</p>
-        <p>3</p>
-    </div>
+        <pre id="py-output" class="output"></pre>
+        <script>
+            async function run() {
+                const pyodide = await loadPyodide();
+                const code = document.getElementById("py-cell").value;
 
-    <h3>c++ example</h3>
-    <pre><code class="code">
-#include <iostream>
-using namespace std;
+                try {
+                    const output = await pyodide.runPythonAsync(code);
+                    document.getElementById("py-output").textContent = output;
+                } catch (err) {
+                    document.getElementById("py-output").textContent = err;
+                }
+            }
+        </script>
 
-int main() {
-    int arr[4] = {1, 2, 3, 4};
-    cout << arr[0] << endl;
-    cout << arr[2] << endl;
-}
-    </code></pre>
-
-    <div class="output">
-        <p>1</p>
-        <p>3</p>
-    </div>
-
-    <h3>efficiency</h3>
-    <ul>
-        <li>access: O(1)</li>
-        <li>update: O(1)</li>
-        <li>insert/delete at end: O(1)</li>
-        <li>insert/delete in middle: O(n)</li>
-    </ul>
-</section>
-
+    </section>
 
     <section>
         <h2>linked lists</h2>
