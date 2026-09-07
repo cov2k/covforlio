@@ -32,18 +32,37 @@
 
         <pre id="py-output" class="output"></pre>
         <script>
-            async function run() {
-                const pyodide = await loadPyodide();
-                const code = document.getElementById("py-cell").value;
+        let pyodide;
 
-                try {
-                    const output = await pyodide.runPythonAsync(code);
-                    document.getElementById("py-output").textContent = output;
-                } catch (err) {
-                    document.getElementById("py-output").textContent = err;
-                }
+        async function loadPy() {
+            pyodide = await loadPyodide();
+        }
+        loadPy();
+
+        async function runPy() {
+            const code = document.getElementById("py-cell").value;
+
+            try {
+                // capture stdout
+                let output = "";
+                pyodide.setStdout({
+                    batched: (data) => {
+                        output += data + "\n";
+                    }
+                });
+
+                // run the code
+                const result = await pyodide.runPythonAsync(code);
+
+                // show printed output OR final expression result
+                document.getElementById("py-output").textContent =
+                    output.trim() || (result !== undefined ? result : "");
+            } catch (err) {
+                document.getElementById("py-output").textContent = err;
             }
+        }
         </script>
+
 
     </section>
 
