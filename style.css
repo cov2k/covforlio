@@ -47,4 +47,10 @@ footer {
     height: 60px;
     border-radius: 50%;
     margin-top: 1rem;
+    animation: spin 6s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
