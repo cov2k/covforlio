@@ -28,7 +28,73 @@
         <h2>architecture</h2>
         <p>discord bot → ingestion api → vector db → retrieval layer</p>
     </section>
+    
+    <section>
+    <h2>api reference</h2>
+    <p>base url: http://localhost:8000</p>
 
+    <h3>POST /retrieval/embed</h3>
+    <p>generate an embedding vector for a given text input.</p>
+
+    <pre>
+request:
+{
+  "text": "hello world"
+}
+
+response:
+{
+  "embedding": [...]
+}
+    </pre>
+
+    <h3>POST /retrieval/store</h3>
+    <p>store text + its embedding in the faiss index.</p>
+
+    <pre>
+request:
+{
+  "text": "some message"
+}
+
+response:
+{
+  "data_stored": "some message"
+}
+    </pre>
+
+    <h3>POST /retrieval/search</h3>
+    <p>retrieve the top-k most similar stored chunks.</p>
+
+    <pre>
+request:
+{
+  "query": "why is my stream lagging?",
+  "k": 3
+}
+
+response:
+{
+  "results": [...]
+}
+    </pre>
+
+    <h3>POST /retrieval/query</h3>
+    <p>perform full retrieval-augmented generation.</p>
+
+    <pre>
+request:
+{
+  "query": "explain my stream lag"
+}
+
+response:
+{
+  "context_used": "...",
+  "response": "..."
+}
+    </pre>
+</section>
     <footer>
         <p>© 2026 cov2k</p>
     </footer>
