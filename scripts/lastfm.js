@@ -9,6 +9,7 @@ async function getLastTrack() {
 
     const track = data.recenttracks.track[0];
     const statusEl = document.getElementById("lastfm-status");
+    const footerEl = document.getElementById("lastfm-footer");
 
     if (!track) {
         statusEl.textContent = "No recent tracks found.";
@@ -22,6 +23,8 @@ async function getLastTrack() {
     statusEl.textContent = nowPlaying
         ? `now playing: ${name.toLowerCase()} by ${artist.toLowerCase()}`
         : `last played: ${name.toLowerCase()} b ${artist.toLowerCase()}`;
+
+     footerEl.innerHTML = `powered by Last.fm -> <a href="https://www.last.fm/user/${USERNAME}" target="_blank">visit my profile</a>`;
 }
 
 getLastTrack();
