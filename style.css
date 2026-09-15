@@ -128,10 +128,16 @@ footer {
 }
 
 .lastfm-footer {
+    color: #fff;
     font-size: 12px;
-    opacity: 0.7;
+    opacity: 0.9;
     margin-top: 4px;
     font-style: italic;
+}
+
+.lastfm-footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
 }
 
 
