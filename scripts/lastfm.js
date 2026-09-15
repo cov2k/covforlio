@@ -9,7 +9,6 @@ async function getLastTrack() {
 
     const track = data.recenttracks.track[0];
     const statusEl = document.getElementById("lastfm-status");
-    const artEl = document.getElementById("lastfm-art");
 
     if (!track) {
         statusEl.textContent = "No recent tracks found.";
@@ -20,17 +19,9 @@ async function getLastTrack() {
     const name = track.name;
     const artist = track.artist["#text"];
 
-    const image = track.image?.find(img => img.size === "medium")?.["#text"];
-
-    if (image) {
-        artEl.src = image;
-    } else {
-        artEl.src = ""; // fallback if no image
-    }
-
     statusEl.textContent = nowPlaying
-        ? `now playing: ${name} by ${artist}`
-        : `last played: ${name} by ${artist}`;
+        ? `now playing: ${name.toLowerCase()} by ${artist.toLowerCase()}`
+        : `last played: ${name.toLowerCase()} b ${artist.toLowerCase()}`;
 }
 
 getLastTrack();
