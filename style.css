@@ -129,13 +129,16 @@ footer {
 
 .lastfm-footer {
     color: #fff;
-    font-size: 12px;
+    font-size: 8px;
     opacity: 0.9;
     margin-top: 4px;
     font-style: italic;
 }
 
-.lastfm-footer a:hover {
+.lastfm-footer a:link,
+.lastfm-footer a:visited,
+.lastfm-footer a:hover,
+.lastfm-footer a:active {
     opacity: 1;
     text-decoration: underline;
 }
