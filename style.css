@@ -114,3 +114,16 @@ footer {
     white-space: pre-wrap;
 }
 
+#lastfm {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.lastfm-art {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+

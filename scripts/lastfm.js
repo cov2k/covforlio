@@ -9,6 +9,7 @@ async function getLastTrack() {
 
     const track = data.recenttracks.track[0];
     const statusEl = document.getElementById("lastfm-status");
+    const artEl = document.getElementById("lastfm-album-art");
 
     if (!track) {
         statusEl.textContent = "No recent tracks found.";
@@ -18,10 +19,20 @@ async function getLastTrack() {
     const nowPlaying = track["@attr"]?.nowplaying === "true";
     const name = track.name;
     const artist = track.artist["#text"];
+    const urlTrack = track.url; // hyperlink to Last.fm track page
 
-    statusEl.textContent = nowPlaying
-        ? `now playing: ${name.toLowerCase()} — ${artist.toLowerCase()}`
-        : `last played: ${name.toLowerCase()} — ${artist.toLowerCase()}`;
+    // Get album art (medium size)
+    const image = track.image?.find(img => img.size === "medium")?.["#text"];
+
+    if (image) {
+        artEl.src = image;
+    } else {
+        artEl.src = ""; // fallback if no image
+    }
+
+    statusEl.innerHTML = nowPlaying
+        ? `now playing:<br><a href="${urlTrack}" target="_blank">${name.toLowerCase()} by ${artist.toLowerCase()}</a>`
+        : `last played:<br><a href="${urlTrack}" target="_blank">${name.toLowerCase()} by ${artist.toLowerCase()}</a>`;
 }
 
 getLastTrack();
