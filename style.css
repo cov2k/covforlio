@@ -128,7 +128,7 @@ footer {
 }
 
 .lastfm-footer {
-    font-size: 12px;
+    font-size: 8px;
     opacity: 0.8;
     margin-top: 4px;
     font-style: italic;
@@ -139,8 +139,8 @@ footer {
 }
 
 .lastfm-icon {
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
     opacity: 0.9;
     transition: opacity 0.2s ease;
 }
