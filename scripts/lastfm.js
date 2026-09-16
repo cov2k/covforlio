@@ -21,7 +21,7 @@ async function getLastTrack() {
 
     statusEl.textContent = nowPlaying
         ? `now playing: ${name.toLowerCase()} by ${artist.toLowerCase()}`
-        : `last played: ${name.toLowerCase()} b ${artist.toLowerCase()}`;
+        : `last played: ${name.toLowerCase()} by ${artist.toLowerCase()}`;
 }
 
 getLastTrack();
